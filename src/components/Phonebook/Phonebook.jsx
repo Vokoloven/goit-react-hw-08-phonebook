@@ -13,7 +13,7 @@ export class Phonebook extends Component {
       { id: 'id-3', name: 'Eden Clements', number: '645-17-79' },
       { id: 'id-4', name: 'Annie Copeland', number: '227-91-26' },
     ],
-    filter: '',
+    filter: [],
   };
 
   addNewName = e => {
@@ -22,11 +22,17 @@ export class Phonebook extends Component {
     const value = e.target[0].value;
     const number = e.target[1].value;
 
-    this.setState({
-      filter: [
-        ...this.state.contacts,
-        ...[{ id: nanoid(), name: value, number: number }],
-      ],
+    this.setState(prevState => {
+      return {
+        contacts: [
+          ...prevState.contacts,
+          ...[{ id: nanoid(), name: value, number: number }],
+        ],
+      };
+    });
+
+    this.setState(prevState => {
+      return { filter: prevState.contacts };
     });
 
     this.state.contacts.find(contact => contact.name === value) &&
@@ -34,10 +40,6 @@ export class Phonebook extends Component {
 
     this.clearInputField();
   };
-
-  componentDidMount() {
-    this.defaultFilter();
-  }
 
   searchByFilter = e => {
     const searchValue = e.target.value.toLocaleLowerCase();
@@ -61,25 +63,25 @@ export class Phonebook extends Component {
     this.setState({ filter: removedValue });
   };
 
+  componentDidMount() {
+    this.defaultFilter();
+  }
+
   defaultFilter = () => {
-    this.setState(prevState => ({ filter: this.state.contacts }));
+    this.setState(prevState => ({ filter: prevState.contacts }));
   };
 
   render() {
-    const { filter, contacts } = this.state;
+    const { filter } = this.state;
 
     return (
       <>
         <Box ml={5} color="primary">
           <h1>Phonebook</h1>
-          <ContactForm onSubmit={this.addNewName}></ContactForm>
+          <ContactForm onSubmit={this.addNewName} />
           <h2>Contacts</h2>
-          <Filter onChange={this.searchByFilter}></Filter>
-          <Contacts
-            contacts={contacts}
-            filter={filter}
-            onClick={this.removeNameFromList}
-          ></Contacts>
+          <Filter onChange={this.searchByFilter} />
+          <Contacts filter={filter} onClick={this.removeNameFromList} />
         </Box>
       </>
     );
