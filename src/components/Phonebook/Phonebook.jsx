@@ -42,7 +42,7 @@ export class Phonebook extends Component {
   searchByFilter = e => {
     const searchValue = e.target.value.toLocaleLowerCase();
 
-    const filteredValue = this.state.contacts.filter(name =>
+    const filteredValue = this.state.filter.filter(name =>
       name.name.toLocaleLowerCase().includes(searchValue)
     );
 
