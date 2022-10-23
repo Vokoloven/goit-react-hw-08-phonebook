@@ -23,7 +23,7 @@ export class Phonebook extends Component {
     const number = e.target[1].value;
 
     this.setState({
-      contacts: [
+      filter: [
         ...this.state.contacts,
         ...[{ id: nanoid(), name: value, number: number }],
       ],
@@ -34,6 +34,10 @@ export class Phonebook extends Component {
 
     this.clearInputField();
   };
+
+  componentDidMount() {
+    this.defaultFilter();
+  }
 
   searchByFilter = e => {
     const searchValue = e.target.value.toLocaleLowerCase();
@@ -54,15 +58,16 @@ export class Phonebook extends Component {
 
     const removedValue = this.state.filter.filter(i => i.id !== removeFromList);
 
-    console.log(removedValue);
-
     this.setState({ filter: removedValue });
+  };
+
+  defaultFilter = () => {
+    this.setState(prevState => ({ filter: this.state.contacts }));
   };
 
   render() {
     const { filter, contacts } = this.state;
 
-    console.log(filter);
     return (
       <>
         <Box ml={5} color="primary">
