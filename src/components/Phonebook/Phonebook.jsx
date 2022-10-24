@@ -32,7 +32,7 @@ export class Phonebook extends Component {
     });
 
     this.setState(prevState => {
-      return { filter: [...prevState.contacts] };
+      return { filter: prevState.contacts };
     });
 
     this.state.contacts.find(contact => contact.name === value) &&
@@ -59,8 +59,13 @@ export class Phonebook extends Component {
   removeNameFromList = e => {
     const removeFromList = e.currentTarget.parentNode.attributes.id.value;
 
-    const removedValue = this.state.filter.filter(i => i.id !== removeFromList);
+    const removedValue = this.state.contacts.filter(
+      i => i.id !== removeFromList
+    );
 
+    console.log(removedValue);
+
+    this.setState({ contacts: removedValue });
     this.setState({ filter: removedValue });
   };
 
