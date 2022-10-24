@@ -61,7 +61,9 @@ export class Phonebook extends Component {
   removeNameFromList = e => {
     const removeFromList = e.currentTarget.parentNode.attributes.id.value;
 
-    const removedValue = this.state.filter.filter(i => i.id !== removeFromList);
+    const removedValue = this.state.contacts.filter(
+      i => i.id !== removeFromList
+    );
 
     console.log(removedValue);
 
