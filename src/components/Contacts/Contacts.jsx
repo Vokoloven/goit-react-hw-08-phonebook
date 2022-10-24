@@ -43,13 +43,8 @@ export const Contacts = ({ filter, onClick, contacts }) => {
   );
 };
 
-// Contacts.propTypes = {
-//   onClick: PropTypes.func.isRequired,
-//   filter: PropTypes.arrayOf(
-//     PropTypes.shape({
-//       id: PropTypes.string.isRequired,
-//       name: PropTypes.string.isRequired,
-//       number: PropTypes.string.isRequired,
-//     })
-//   ),
-// };
+Contacts.propTypes = {
+  onClick: PropTypes.func.isRequired,
+  filter: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
+  contacts: PropTypes.array,
+};
