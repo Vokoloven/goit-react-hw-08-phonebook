@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 
 const ButtonStyle = styled.button`
   margin-top: ${p => p.theme.space[3]}px;
@@ -18,4 +19,8 @@ export const DeleteContactButton = ({ onClick }) => {
       Delete
     </ButtonStyle>
   );
+};
+
+DeleteContactButton.propTypes = {
+  onClick: PropTypes.func.isRequired,
 };

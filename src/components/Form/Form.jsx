@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 import { Input } from 'components/Input/Input';
 
 import { AddContactButton } from 'components/Button/Button';
@@ -15,4 +16,8 @@ export const ContactForm = ({ onSubmit }) => {
       <AddContactButton />
     </FormStyle>
   );
+};
+
+ContactForm.propTypes = {
+  onSubmit: PropTypes.func.isRequired,
 };

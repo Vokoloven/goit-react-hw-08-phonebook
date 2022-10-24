@@ -8,7 +8,6 @@ const UlStyled = styled.ul`
 `;
 
 export const Contacts = ({ filter, onClick }) => {
-  console.log(filter);
   return (
     <>
       <UlStyled>
@@ -27,6 +26,7 @@ export const Contacts = ({ filter, onClick }) => {
 };
 
 Contacts.propTypes = {
+  onClick: PropTypes.func.isRequired,
   filter: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.string.isRequired,
