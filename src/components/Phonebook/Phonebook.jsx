@@ -22,21 +22,22 @@ export class Phonebook extends Component {
     const value = e.target[0].value;
     const number = e.target[1].value;
 
-    this.setState(prevState => {
-      return {
-        contacts: [
-          ...prevState.contacts,
-          ...[{ id: nanoid(), name: value, number: number }],
-        ],
-      };
-    });
-
-    this.setState(prevState => {
-      return { filter: prevState.contacts };
-    });
-
-    this.state.contacts.find(contact => contact.name === value) &&
+    if (this.state.contacts.find(contact => contact.name === value)) {
       alert(`${value} is already in contacts.`);
+    } else {
+      this.setState(prevState => {
+        return {
+          contacts: [
+            ...prevState.contacts,
+            ...[{ id: nanoid(), name: value, number: number }],
+          ],
+        };
+      });
+
+      this.setState(prevState => {
+        return { filter: prevState.contacts };
+      });
+    }
 
     this.clearInputField();
   };
