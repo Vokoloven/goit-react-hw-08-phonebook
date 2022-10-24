@@ -63,8 +63,6 @@ export class Phonebook extends Component {
       i => i.id !== removeFromList
     );
 
-    console.log(removedValue);
-
     this.setState({ contacts: removedValue });
     this.setState({ filter: removedValue });
   };
