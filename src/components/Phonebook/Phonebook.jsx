@@ -14,8 +14,8 @@ export class Phonebook extends Component {
   addNewName = e => {
     e.preventDefault();
 
-    const value = e.target[0].value;
-    const number = e.target[1].value;
+    const value = e.target.name.value;
+    const number = e.target.number.value;
 
     if (this.state.contacts.find(contact => contact.name === value)) {
       alert(`${value} is already in contacts.`);
