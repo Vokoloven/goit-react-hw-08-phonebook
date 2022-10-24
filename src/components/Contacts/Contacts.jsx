@@ -8,6 +8,7 @@ const UlStyled = styled.ul`
 `;
 
 export const Contacts = ({ filter, onClick, contacts }) => {
+  console.log(filter);
   if (contacts.length === 0) {
     return <h2>No any contacts in phonebook</h2>;
   }
@@ -50,12 +51,13 @@ Contacts.propTypes = {
   onClick: PropTypes.func.isRequired,
   filter: PropTypes.oneOfType([
     PropTypes.string,
-    PropTypes.array,
-    PropTypes.shape({
-      name: PropTypes.string.isRequired,
-      number: PropTypes.string.isRequired,
-    }),
-  ]),
+    PropTypes.arrayOf(
+      PropTypes.shape({
+        name: PropTypes.string.isRequired,
+        number: PropTypes.string.isRequired,
+      }).isRequired
+    ).isRequired,
+  ]).isRequired,
   contacts: PropTypes.arrayOf(
     PropTypes.shape({
       name: PropTypes.string.isRequired,
