@@ -8,6 +8,9 @@ const UlStyled = styled.ul`
 `;
 
 export const Contacts = ({ filter, onClick, contacts }) => {
+  if (contacts.length === 0) {
+    return <h2>No any contacts in phonebook</h2>;
+  }
   if (filter === '') {
     return (
       <>
