@@ -45,8 +45,6 @@ export class Phonebook extends Component {
       name.name.toLocaleLowerCase().includes(searchValue)
     );
 
-    console.log(filteredValue);
-
     this.setState({ filter: filteredValue });
   };
 
