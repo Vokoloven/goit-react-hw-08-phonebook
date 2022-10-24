@@ -32,7 +32,7 @@ export class Phonebook extends Component {
     });
 
     this.setState(prevState => {
-      return { filter: prevState.contacts };
+      return { filter: [...prevState.contacts] };
     });
 
     this.state.contacts.find(contact => contact.name === value) &&
@@ -44,9 +44,10 @@ export class Phonebook extends Component {
   searchByFilter = e => {
     const searchValue = e.target.value.toLocaleLowerCase();
 
-    const filteredValue = this.state.filter.filter(name =>
+    const filteredValue = this.state.contacts.filter(name =>
       name.name.toLocaleLowerCase().includes(searchValue)
     );
+    console.log(filteredValue);
 
     this.setState({ filter: filteredValue });
   };
