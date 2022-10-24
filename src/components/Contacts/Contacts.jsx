@@ -7,7 +7,25 @@ const UlStyled = styled.ul`
   color: ${p => p.theme.colors.text};
 `;
 
-export const Contacts = ({ filter, onClick }) => {
+export const Contacts = ({ filter, onClick, contacts }) => {
+  if (filter === '') {
+    return (
+      <>
+        <UlStyled>
+          {contacts &&
+            contacts.map(f => {
+              return (
+                <li key={f.id} id={f.id}>
+                  {f.name}: {f.number}
+                  <DeleteContactButton onClick={onClick} />
+                </li>
+              );
+            })}
+        </UlStyled>
+      </>
+    );
+  }
+
   return (
     <>
       <UlStyled>
@@ -25,13 +43,13 @@ export const Contacts = ({ filter, onClick }) => {
   );
 };
 
-Contacts.propTypes = {
-  onClick: PropTypes.func.isRequired,
-  filter: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.string.isRequired,
-      name: PropTypes.string.isRequired,
-      number: PropTypes.string.isRequired,
-    })
-  ),
-};
+// Contacts.propTypes = {
+//   onClick: PropTypes.func.isRequired,
+//   filter: PropTypes.arrayOf(
+//     PropTypes.shape({
+//       id: PropTypes.string.isRequired,
+//       name: PropTypes.string.isRequired,
+//       number: PropTypes.string.isRequired,
+//     })
+//   ),
+// };

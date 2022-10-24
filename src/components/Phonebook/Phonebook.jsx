@@ -13,7 +13,7 @@ export class Phonebook extends Component {
       { id: 'id-3', name: 'Eden Clements', number: '645-17-79' },
       { id: 'id-4', name: 'Annie Copeland', number: '227-91-26' },
     ],
-    filter: [],
+    filter: '',
   };
 
   addNewName = e => {
@@ -61,26 +61,20 @@ export class Phonebook extends Component {
   removeNameFromList = e => {
     const removeFromList = e.currentTarget.parentNode.attributes.id.value;
 
+    if (this.state.filter) {
+      const removedValue = this.state.filter.filter(
+        i => i.id !== removeFromList
+      );
+      this.setState({ filter: removedValue });
+    }
     const removedValue = this.state.contacts.filter(
       i => i.id !== removeFromList
     );
-
-    console.log(removedValue);
-
     this.setState({ contacts: removedValue });
-    this.setState({ filter: removedValue });
-  };
-
-  componentDidMount() {
-    this.defaultFilter();
-  }
-
-  defaultFilter = () => {
-    this.setState(prevState => ({ filter: prevState.contacts }));
   };
 
   render() {
-    const { filter } = this.state;
+    const { filter, contacts } = this.state;
 
     return (
       <>
@@ -89,7 +83,11 @@ export class Phonebook extends Component {
           <ContactForm onSubmit={this.addNewName} />
           <h2>Contacts</h2>
           <Filter onChange={this.searchByFilter} />
-          <Contacts filter={filter} onClick={this.removeNameFromList} />
+          <Contacts
+            filter={filter}
+            contacts={contacts}
+            onClick={this.removeNameFromList}
+          />
         </Box>
       </>
     );
