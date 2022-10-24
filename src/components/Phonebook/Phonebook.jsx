@@ -33,10 +33,6 @@ export class Phonebook extends Component {
           ],
         };
       });
-
-      this.setState(prevState => {
-        return { filter: prevState.contacts };
-      });
     }
 
     this.clearInputField();
