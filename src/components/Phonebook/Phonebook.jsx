@@ -12,7 +12,7 @@ export const Phonebook = () => {
   useEffect(() => {
     const data = localStorage.getItem('data');
 
-    if (data.length > 2) {
+    if (data && data.length > 2) {
       setContacts(JSON.parse(data));
     }
   }, []);
