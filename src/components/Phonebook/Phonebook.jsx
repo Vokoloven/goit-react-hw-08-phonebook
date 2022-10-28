@@ -1,97 +1,83 @@
-import { Component } from 'react';
+import { useState, useEffect } from 'react';
 import { nanoid } from 'nanoid';
 import { ContactForm } from 'components/Form/Form';
 import { Box } from 'components/Theme/Box';
 import { Filter } from 'components/Filter/Filter';
 import { Contacts } from 'components/Contacts/Contacts';
 
-export class Phonebook extends Component {
-  state = {
-    contacts: [],
-    filter: '',
-  };
+export const Phonebook = () => {
+  const [filter, setFilter] = useState('');
+  const [contacts, setContacts] = useState([]);
 
-  addNewName = e => {
+  useEffect(() => {
+    const data = localStorage.getItem('data');
+
+    if (data.length > 2) {
+      setContacts(JSON.parse(data));
+    }
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem('data', JSON.stringify(contacts));
+  }, [contacts]);
+
+  const addNewName = e => {
     e.preventDefault();
 
     const value = e.target.name.value;
     const number = e.target.number.value;
 
-    if (this.state.contacts.find(contact => contact.name === value)) {
+    if (contacts.find(contact => contact.name === value)) {
       alert(`${value} is already in contacts.`);
     } else {
-      this.setState(prevState => {
-        return {
-          contacts: [
-            ...prevState.contacts,
-            ...[{ id: nanoid(), name: value, number: number }],
-          ],
-        };
+      setContacts(prevState => {
+        return [
+          ...prevState,
+          ...[{ id: nanoid(), name: value, number: number }],
+        ];
       });
     }
-
-    this.clearInputField();
+    clearInputField();
   };
 
-  searchByFilter = e => {
-    const searchValue = e.target.value.toLocaleLowerCase();
-
-    const filteredValue = this.state.contacts.filter(name =>
-      name.name.toLocaleLowerCase().includes(searchValue)
-    );
-
-    this.setState({ filter: filteredValue });
-  };
-
-  clearInputField = () => {
+  const clearInputField = () => {
     document.getElementById('formUser').reset();
   };
 
-  removeNameFromList = e => {
-    const removeFromList = e.currentTarget.parentNode.attributes.id.value;
+  const searchByFilter = e => {
+    const searchValue = e.target.value.toLocaleLowerCase();
 
-    if (this.state.filter) {
-      const removedValue = this.state.filter.filter(
-        i => i.id !== removeFromList
-      );
-      this.setState({ filter: removedValue });
-    }
-    const removedValue = this.state.contacts.filter(
-      i => i.id !== removeFromList
+    const filteredValue = contacts.filter(name =>
+      name.name.toLocaleLowerCase().includes(searchValue)
     );
-    this.setState({ contacts: removedValue });
+
+    setFilter(filteredValue);
   };
 
-  componentDidUpdate(prevProps, prevState) {
-    if (this.state.contacts !== prevState.contacts) {
-      localStorage.setItem('contacts', JSON.stringify(this.state.contacts));
+  const removeNameFromList = e => {
+    const removeFromList = e.currentTarget.parentNode.attributes.id.value;
+
+    if (filter) {
+      const removedValue = filter.filter(i => i.id !== removeFromList);
+      setFilter(removedValue);
     }
-  }
+    const removedValue = contacts.filter(i => i.id !== removeFromList);
+    setContacts(removedValue);
+  };
 
-  componentDidMount() {
-    const contacts = localStorage.getItem('contacts');
-    if (contacts) {
-      this.setState({ contacts: JSON.parse(contacts) });
-    }
-  }
-
-  render() {
-    const { filter, contacts } = this.state;
-
-    return (
-      <>
-        <Box ml={5} color="primary">
-          <h1>Phonebook</h1>
-          <ContactForm onSubmit={this.addNewName} />
-          <h2>Contacts</h2>
-          <Filter onChange={this.searchByFilter} />
-          <Contacts
-            filter={filter}
-            contacts={contacts}
-            onClick={this.removeNameFromList}
-          />
-        </Box>
-      </>
-    );
-  }
-}
+  return (
+    <>
+      <Box ml={5} color="primary">
+        <h1>Phonebook</h1>
+        <ContactForm onSubmit={addNewName} />
+        <h2>Contacts</h2>
+        <Filter onChange={searchByFilter} />
+        <Contacts
+          filter={filter}
+          contacts={contacts}
+          onClick={removeNameFromList}
+        />
+      </Box>
+    </>
+  );
+};
