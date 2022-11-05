@@ -1,29 +1,36 @@
-import { useState, useEffect, useRef } from 'react';
+// import { useState, useEffect, useRef } from 'react';
 import { nanoid } from 'nanoid';
+import { addContacts } from '../../redux/addContactSlice';
+import { onFilter } from '../../redux/addFilterSlice';
+import { useSelector, useDispatch } from 'react-redux';
 import { ContactForm } from 'components/Form/Form';
 import { Box } from 'components/Theme/Box';
 import { Filter } from 'components/Filter/Filter';
 import { Contacts } from 'components/Contacts/Contacts';
 
 export const Phonebook = () => {
-  const [filter, setFilter] = useState('');
-  const [contacts, setContacts] = useState([]);
-  const isFirstRender = useRef(true);
+  // const [filter, setFilter] = useState('');
+  // const [contacts, setContacts] = useState([]);
+  // const isFirstRender = useRef(true);
+  const dispatch = useDispatch();
 
-  useEffect(() => {
-    const data = localStorage.getItem('data');
+  const contacts = useSelector(state => state.contacts);
+  const filter = useSelector(state => state.filter);
 
-    setContacts(JSON.parse(data));
-  }, []);
+  // useEffect(() => {
+  //   const data = localStorage.getItem('data');
 
-  useEffect(() => {
-    if (isFirstRender.current) {
-      isFirstRender.current = false;
-      return;
-    }
+  //   setContacts(JSON.parse(data));
+  // }, []);
 
-    localStorage.setItem('data', JSON.stringify(contacts));
-  }, [contacts]);
+  // useEffect(() => {
+  //   if (isFirstRender.current) {
+  //     isFirstRender.current = false;
+  //     return;
+  //   }
+
+  //   localStorage.setItem('data', JSON.stringify(contacts));
+  // }, [contacts]);
 
   const addNewName = e => {
     e.preventDefault();
@@ -31,16 +38,28 @@ export const Phonebook = () => {
     const value = e.target.name.value;
     const number = e.target.number.value;
 
-    if (contacts.find(contact => contact.name === value)) {
+    if (contacts.find(contacts => contacts.name === value)) {
       alert(`${value} is already in contacts.`);
     } else {
-      setContacts(prevState => {
-        return [
-          ...prevState,
+      dispatch(
+        addContacts([
+          ...contacts,
           ...[{ id: nanoid(), name: value, number: number }],
-        ];
-      });
+        ])
+      );
     }
+
+    // if (contacts.find(contact => contact.name === value)) {
+    //   alert(`${value} is already in contacts.`);
+    // } else {
+
+    //   setContacts(prevState => {
+    //     return [
+    //       ...prevState,
+    //       ...[{ id: nanoid(), name: value, number: number }],
+    //     ];
+    //   });
+    // }
     clearInputField();
   };
 
@@ -55,7 +74,11 @@ export const Phonebook = () => {
       name.name.toLocaleLowerCase().includes(searchValue)
     );
 
-    setFilter(filteredValue);
+    if (searchValue !== '') {
+      dispatch(onFilter(filteredValue));
+    } else {
+      dispatch(onFilter(''));
+    }
   };
 
   const removeNameFromList = e => {
@@ -63,10 +86,10 @@ export const Phonebook = () => {
 
     if (filter) {
       const removedValue = filter.filter(i => i.id !== removeFromList);
-      setFilter(removedValue);
+      dispatch(onFilter(removedValue));
     }
     const removedValue = contacts.filter(i => i.id !== removeFromList);
-    setContacts(removedValue);
+    dispatch(addContacts(removedValue));
   };
 
   return (
