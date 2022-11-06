@@ -1,7 +1,7 @@
 // import { useState, useEffect, useRef } from 'react';
 import { nanoid } from 'nanoid';
-import { addContacts } from '../../redux/addContactSlice';
-import { onFilter } from '../../redux/addFilterSlice';
+import { useRef } from 'react';
+import { addContacts, contactsFilter } from '../../redux/addContactSlice';
 import { useSelector, useDispatch } from 'react-redux';
 import { ContactForm } from 'components/Form/Form';
 import { Box } from 'components/Theme/Box';
@@ -9,28 +9,11 @@ import { Filter } from 'components/Filter/Filter';
 import { Contacts } from 'components/Contacts/Contacts';
 
 export const Phonebook = () => {
-  // const [filter, setFilter] = useState('');
-  // const [contacts, setContacts] = useState([]);
-  // const isFirstRender = useRef(true);
+  const inputRef = useRef('');
   const dispatch = useDispatch();
 
-  const contacts = useSelector(state => state.contacts);
-  const filter = useSelector(state => state.filter);
-
-  // useEffect(() => {
-  //   const data = localStorage.getItem('data');
-
-  //   setContacts(JSON.parse(data));
-  // }, []);
-
-  // useEffect(() => {
-  //   if (isFirstRender.current) {
-  //     isFirstRender.current = false;
-  //     return;
-  //   }
-
-  //   localStorage.setItem('data', JSON.stringify(contacts));
-  // }, [contacts]);
+  const contacts = useSelector(state => state.contactsDatabase.contact);
+  const filter = useSelector(state => state.contactsDatabase.filter);
 
   const addNewName = e => {
     e.preventDefault();
@@ -44,22 +27,10 @@ export const Phonebook = () => {
       dispatch(
         addContacts([
           ...contacts,
-          ...[{ id: nanoid(), name: value, number: number }],
+          { id: nanoid(), name: value, number: number },
         ])
       );
     }
-
-    // if (contacts.find(contact => contact.name === value)) {
-    //   alert(`${value} is already in contacts.`);
-    // } else {
-
-    //   setContacts(prevState => {
-    //     return [
-    //       ...prevState,
-    //       ...[{ id: nanoid(), name: value, number: number }],
-    //     ];
-    //   });
-    // }
     clearInputField();
   };
 
@@ -69,27 +40,29 @@ export const Phonebook = () => {
 
   const searchByFilter = e => {
     const searchValue = e.target.value.toLocaleLowerCase();
+    inputRef.current = searchValue;
 
     const filteredValue = contacts.filter(name =>
       name.name.toLocaleLowerCase().includes(searchValue)
     );
 
-    if (searchValue !== '') {
-      dispatch(onFilter(filteredValue));
-    } else {
-      dispatch(onFilter(''));
-    }
+    dispatch(contactsFilter(filteredValue));
+  };
+
+  const removerTool = (name, action, removeableContactId) => {
+    const filteredContactToRemove = name.filter(
+      i => i.id !== removeableContactId
+    );
+    dispatch(action(filteredContactToRemove));
   };
 
   const removeNameFromList = e => {
-    const removeFromList = e.currentTarget.parentNode.attributes.id.value;
+    const removeableContactId = e.currentTarget.parentNode.attributes.id.value;
 
     if (filter) {
-      const removedValue = filter.filter(i => i.id !== removeFromList);
-      dispatch(onFilter(removedValue));
+      removerTool(filter, contactsFilter, removeableContactId);
     }
-    const removedValue = contacts.filter(i => i.id !== removeFromList);
-    dispatch(addContacts(removedValue));
+    removerTool(contacts, addContacts, removeableContactId);
   };
 
   return (
@@ -100,6 +73,7 @@ export const Phonebook = () => {
         <h2>Contacts</h2>
         <Filter onChange={searchByFilter} />
         <Contacts
+          inputRef={inputRef.current}
           filter={filter}
           contacts={contacts}
           onClick={removeNameFromList}

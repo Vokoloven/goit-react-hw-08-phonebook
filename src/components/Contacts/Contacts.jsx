@@ -7,11 +7,11 @@ const UlStyled = styled.ul`
   color: ${p => p.theme.colors.text};
 `;
 
-export const Contacts = ({ filter, onClick, contacts }) => {
+export const Contacts = ({ filter, onClick, contacts, inputRef }) => {
   if (contacts.length === 0) {
     return <h2>No any contacts in phonebook</h2>;
   }
-  if (filter === '') {
+  if (inputRef === '') {
     return (
       <>
         <UlStyled>
