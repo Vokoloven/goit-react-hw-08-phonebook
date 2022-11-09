@@ -20,14 +20,9 @@ export const Phonebook = () => {
 
   const contacts = items;
 
-  // const contacts = useSelector(state => state.contactsDatabase.contact.items);
-  // const filter = useSelector(state => state.contactsDatabase.filter);
-
   useEffect(() => {
     dispatch(getApiContacts());
   }, [dispatch]);
-
-  // const zalupa = useSelector(state => console.log(state.contactsDatabase));
 
   const addNewName = e => {
     e.preventDefault();
@@ -75,31 +70,6 @@ export const Phonebook = () => {
 
     dispatch(deleteApiContacts(id));
   };
-
-  // const removerTool = (name, action, removeableContactId) => {
-  //   const filteredContactToRemove = name.filter(
-  //     i => i.id !== removeableContactId
-  //   );
-
-  //   const data = name.find(({ id }) => id === removeableContactId);
-
-  //   const { id } = data;
-
-  //   if (id) {
-  //     dispatch(deleteApiContacts(id));
-  //   }
-
-  //   dispatch(action(filteredContactToRemove));
-  // };
-
-  // const removeNameFromList = e => {
-  //   const removeableContactId = e.currentTarget.parentNode.attributes.id.value;
-
-  //   // if (filter) {
-  //     // removerTool(filter, contactsFilter, removeableContactId);
-  //   }
-  //   removerTool(contacts, deleteApiContacts, removeableContactId);
-  // };
 
   return (
     <>
