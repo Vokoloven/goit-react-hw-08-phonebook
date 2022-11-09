@@ -19,7 +19,7 @@ export const Contacts = ({ filter, onClick, contacts, inputRef }) => {
             contacts.map(f => {
               return (
                 <li key={f.id} id={f.id}>
-                  {f.name}: {f.number}
+                  {f.name}: {f.phone}
                   <DeleteContactButton onClick={onClick} />
                 </li>
               );
@@ -36,7 +36,7 @@ export const Contacts = ({ filter, onClick, contacts, inputRef }) => {
           filter.map(f => {
             return (
               <li key={f.id} id={f.id}>
-                {f.name}: {f.number}
+                {f.name}: {f.phone}
                 <DeleteContactButton onClick={onClick} />
               </li>
             );
@@ -53,14 +53,14 @@ Contacts.propTypes = {
     PropTypes.arrayOf(
       PropTypes.shape({
         name: PropTypes.string.isRequired,
-        number: PropTypes.string.isRequired,
+        phone: PropTypes.string.isRequired,
       }).isRequired
     ).isRequired,
   ]).isRequired,
   contacts: PropTypes.arrayOf(
     PropTypes.shape({
       name: PropTypes.string.isRequired,
-      number: PropTypes.string.isRequired,
+      phone: PropTypes.string.isRequired,
     })
   ),
 };
