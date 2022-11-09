@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { getApiContacts } from 'service/getContacts.service';
-import { postApiContacts } from 'service/postContacts.service';
-import { deleteApiContacts } from 'service/deleteContacts.service';
+import { getApiContacts } from './service/getContacts.service';
+import { postApiContacts } from './service/postContacts.service';
+import { deleteApiContacts } from './service/deleteContacts.service';
 
 export const contactSlice = createSlice({
   name: 'contactDatabase',

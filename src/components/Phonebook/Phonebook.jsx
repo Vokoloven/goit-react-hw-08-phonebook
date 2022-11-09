@@ -5,11 +5,11 @@ import { ContactForm } from 'components/Form/Form';
 import { Box } from 'components/Theme/Box';
 import { Filter } from 'components/Filter/Filter';
 import { Contacts } from 'components/Contacts/Contacts';
-import { getApiContacts } from 'service/getContacts.service';
-import { postApiContacts } from 'service/postContacts.service';
 import { getContacts, getFilter } from 'redux/selectors';
 import { contactsFilter } from 'redux/getContactsSlice';
-import { deleteApiContacts } from 'service/deleteContacts.service';
+import { getApiContacts } from 'redux/service/getContacts.service';
+import { postApiContacts } from 'redux/service/postContacts.service';
+import { deleteApiContacts } from 'redux/service/deleteContacts.service';
 
 export const Phonebook = () => {
   const inputRef = useRef('');
