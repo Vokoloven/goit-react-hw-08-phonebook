@@ -1,12 +1,13 @@
 export const theme = {
   breakpoints: ['40em', '52em', '64em'],
   space: [0, 4, 8, 16, 32, 64, 128, 256, 512],
+  sizes: [0, 4, 8, 16, 32, 36, 64, 128, 256, 512],
   fonts: {
     body: 'system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif',
     heading: 'inherit',
     monospace: 'Menlo, monospace',
   },
-  fontSizes: [12, 14, 16, 32, 64],
+  fontSizes: [12, 14, 16, 20, 24, 32, 48, 64, 96],
   fontWeights: {
     body: 400,
     heading: 700,
@@ -21,8 +22,12 @@ export const theme = {
     background: '#fff',
     primary: '#07c',
     secondary: '#30c',
-    accent: '#609',
     muted: '#f6f6f6',
+    hover: '#f780eb',
+    active: '#007bff',
+  },
+  shadows: {
+    main: '2px 2px 2px 3px rgba(0, 0, 0, 0.2)',
   },
   text: {
     heading: {
@@ -31,18 +36,12 @@ export const theme = {
       fontWeight: 'heading',
     },
   },
-  radii: {
-    none: 'none',
-    zero: 0,
-    xs: 2,
-  },
   styles: {
     root: {
       fontFamily: 'body',
       lineHeight: 'body',
       fontWeight: 'body',
     },
-
     h1: {
       variant: 'text.heading',
       fontSize: 5,

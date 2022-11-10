@@ -2,7 +2,7 @@ import { useEffect, useRef } from 'react';
 // import { nanoid } from 'nanoid';
 import { useSelector, useDispatch } from 'react-redux';
 import { ContactForm } from 'components/Form/Form';
-import { Box } from 'components/Theme/Box';
+import { Box } from 'Theme/Box';
 import { Filter } from 'components/Filter/Filter';
 import { Contacts } from 'components/Contacts/Contacts';
 import { getContacts, getFilter } from 'redux/selectors';
