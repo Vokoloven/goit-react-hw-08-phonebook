@@ -5,17 +5,13 @@ import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import operations from 'redux/auth/auth-operations';
 
-export const Register = () => {
-  const [name, setName] = useState('');
+export const LogIn = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-
   const dispatch = useDispatch();
 
   const handleChange = ({ target: { name, value } }) => {
     switch (name) {
-      case 'name':
-        return setName(value);
       case 'email':
         return setEmail(value);
       case 'password':
@@ -28,9 +24,8 @@ export const Register = () => {
   const handleSubmit = e => {
     e.preventDefault();
 
-    dispatch(operations.register({ name, email, password }));
+    dispatch(operations.logIn({ email, password }));
 
-    setName('');
     setEmail('');
     setPassword('');
   };
@@ -46,20 +41,6 @@ export const Register = () => {
       ml={3}
       mt={3}
     >
-      <label htmlFor="name">Name</label>
-      <StyledInput
-        type="text"
-        value={name}
-        name="name"
-        id="name"
-        onChange={handleChange}
-        autoComplete="off"
-        pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я
-        ])?[a-zA-Zа-яА-Я]*)*$"
-        title="Name may contain only letters"
-        required
-      />
-
       <label htmlFor="email">Email</label>
       <StyledInput
         type="email"

@@ -1,16 +1,12 @@
-import axios from 'axios';
+import { axiosConfig } from 'redux/auth/auth-operations';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
-const getApiContactsConfig = axios.create({
-  baseURL: 'https://63697a5415219b849618e278.mockapi.io/api/v1/',
-  method: 'get',
-});
-
 export const getApiContacts = createAsyncThunk(
-  'contacts/deleteContact',
+  'contacts/fetchAll',
+
   async (_, thunkAPI) => {
     try {
-      const response = await getApiContactsConfig.get('contacts');
+      const response = await axiosConfig.get('/contacts');
 
       return response.data;
     } catch (e) {

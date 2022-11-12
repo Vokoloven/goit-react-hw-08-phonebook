@@ -33,7 +33,7 @@ export const Phonebook = () => {
     if (contacts.find(contacts => contacts.name === value)) {
       alert(`${value} is already in contacts.`);
     } else {
-      dispatch(postApiContacts({ name: value, phone: number }));
+      dispatch(postApiContacts({ name: value, number: number }));
     }
 
     clearInputField();
@@ -74,9 +74,13 @@ export const Phonebook = () => {
   return (
     <>
       <Box ml={5} color="primary">
-        <h1>Phonebook</h1>
+        <Box as="h2" mt={3} mb={3}>
+          Phonebook
+        </Box>
         <ContactForm onSubmit={addNewName} />
-        <h2>Contacts</h2>
+        <Box as="h2" mb={3} mt={3}>
+          Contacts
+        </Box>
         <Filter onChange={searchByFilter} />
         <Contacts
           inputRef={inputRef.current}

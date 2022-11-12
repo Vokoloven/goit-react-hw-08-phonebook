@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { Box } from 'Theme/Box';
 
 const InputStyle = styled.input`
   width: ${p => p.theme.space[7]}px;
@@ -18,7 +19,9 @@ apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles
 de Batz de Castelmore d'Artagnan"
         required
       />
-      <h2>Number</h2>
+      <Box as="h2" mt={3} mb={3}>
+        Number
+      </Box>
       <InputStyle
         type="tel"
         name="number"

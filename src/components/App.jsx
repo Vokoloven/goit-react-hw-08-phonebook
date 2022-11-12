@@ -1,24 +1,21 @@
 import { Routes, Route } from 'react-router-dom';
-import { Phonebook } from './Phonebook/Phonebook';
+import { AppBar } from './AppBar/AppBar';
 import { Register } from './Register/Register';
+import { Phonebook } from './Phonebook/Phonebook';
+import { Home } from './Home/Home';
 import { GlobalStyle } from 'Theme/globalStyle';
-import { Box } from 'Theme/Box';
-import { StyledLink } from './Home/StyledLink';
+import { LogIn } from './LogIn/LogIn';
 
 export const App = () => {
   return (
     <>
-      <Box as="nav" mt={3}>
-        <StyledLink to="/" end>
-          Home
-        </StyledLink>
-        <StyledLink to="registration">Registration</StyledLink>
-      </Box>
-
       <GlobalStyle />
+      <AppBar />
       <Routes>
-        <Route path="/" element={<Phonebook />} />
+        <Route path="/" element={<Home />} />
+        <Route path="phonebook" element={<Phonebook />} />
         <Route path="registration" element={<Register />} />
+        <Route path="login" element={<LogIn />} />
       </Routes>
     </>
   );
