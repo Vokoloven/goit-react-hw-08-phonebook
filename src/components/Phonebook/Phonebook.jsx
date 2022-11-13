@@ -10,19 +10,26 @@ import { contactsFilter } from 'redux/getContactsSlice';
 import { getApiContacts } from 'redux/service/getContacts.service';
 import { postApiContacts } from 'redux/service/postContacts.service';
 import { deleteApiContacts } from 'redux/service/deleteContacts.service';
+import { userData } from 'redux/selectors';
+import operations from 'redux/auth/auth-operations';
 
-export const Phonebook = () => {
+const Phonebook = () => {
   const inputRef = useRef('');
   const dispatch = useDispatch();
 
   const { items } = useSelector(getContacts);
   const { filter } = useSelector(getFilter);
+  const { token } = useSelector(userData);
 
   const contacts = items;
 
   useEffect(() => {
-    dispatch(getApiContacts());
+    dispatch(operations.fetchCurrentUser());
   }, [dispatch]);
+
+  useEffect(() => {
+    dispatch(getApiContacts());
+  }, [dispatch, token]);
 
   const addNewName = e => {
     e.preventDefault();
@@ -92,3 +99,5 @@ export const Phonebook = () => {
     </>
   );
 };
+
+export default Phonebook;

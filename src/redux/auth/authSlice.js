@@ -28,6 +28,10 @@ export const authSlice = createSlice({
       state.token = null;
       state.isLoggedIn = false;
     },
+    [operations.fetchCurrentUser.fulfilled](state, action) {
+      state.user = action.payload;
+      state.isLoggedIn = true;
+    },
   },
 });
 

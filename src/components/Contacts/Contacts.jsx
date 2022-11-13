@@ -23,10 +23,18 @@ export const Contacts = ({ filter, onClick, contacts, inputRef }) => {
           {contacts &&
             contacts.map(f => {
               return (
-                <li key={f.id} id={f.id}>
-                  {f.name}: {f.phone}
+                <Box
+                  key={f.id}
+                  id={f.id}
+                  display="flex"
+                  alignItems="center"
+                  mb={3}
+                >
+                  <Box as="li" mr={3}>
+                    {f.name}: {f.number}
+                  </Box>
                   <DeleteContactButton onClick={onClick} />
-                </li>
+                </Box>
               );
             })}
         </UlStyled>
@@ -40,10 +48,18 @@ export const Contacts = ({ filter, onClick, contacts, inputRef }) => {
         {filter &&
           filter.map(f => {
             return (
-              <li key={f.id} id={f.id}>
-                {f.name}: {f.phone}
+              <Box
+                key={f.id}
+                id={f.id}
+                display="flex"
+                alignItems="center"
+                mb={3}
+              >
+                <Box as="li" mr={3}>
+                  {f.name}: {f.number}
+                </Box>
                 <DeleteContactButton onClick={onClick} />
-              </li>
+              </Box>
             );
           })}
       </UlStyled>

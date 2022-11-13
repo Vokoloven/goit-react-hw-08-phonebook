@@ -25,6 +25,7 @@ export const theme = {
     muted: '#f6f6f6',
     hover: '#f780eb',
     active: '#007bff',
+    other: 'green',
   },
   shadows: {
     main: '2px 2px 2px 3px rgba(0, 0, 0, 0.2)',

@@ -1,23 +1,31 @@
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
+import Button from '@mui/material/Button';
+import { Box } from 'Theme/Box';
 
-const ButtonStyle = styled.button`
-  margin-top: ${p => p.theme.space[3]}px;
-  margin-left: ${p => p.theme.space[3]}px;
+// const ButtonStyle = styled.button`
+//   margin-top: ${p => p.theme.space[3]}px;
+//   margin-left: ${p => p.theme.space[3]}px;
 
-  width: ${p => p.theme.space[6]}px;
-  height: ${p => p.theme.space[4]}px;
-`;
+//   width: ${p => p.theme.space[6]}px;
+//   height: ${p => p.theme.space[4]}px;
+// `;
 
 export const AddContactButton = () => {
-  return <ButtonStyle type="submit">Add Contact</ButtonStyle>;
+  return (
+    <Box>
+      <Button variant="contained" color="success" type="submit">
+        Add Contact
+      </Button>
+    </Box>
+  );
 };
 
 export const DeleteContactButton = ({ onClick }) => {
   return (
-    <ButtonStyle onClick={onClick} type="button">
+    <Button color="error" variant="outlined" onClick={onClick} type="button">
       Delete
-    </ButtonStyle>
+    </Button>
   );
 };
 

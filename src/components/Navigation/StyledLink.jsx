@@ -10,7 +10,7 @@ export const StyledLink = styled(NavLink)`
   &.active {
     padding: 5px;
     color: ${p => p.theme.colors.background};
-    background-color: ${p => p.theme.colors.active};
+    background-color: ${p => p.theme.colors.other};
     border-radius: ${p => p.theme.space[2]}px;
   }
 

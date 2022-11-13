@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
-import { Input } from 'components/Input/Input';
+import { Inputik } from 'components/Input/Input';
 
 import { AddContactButton } from 'components/Button/Button';
 
@@ -12,7 +12,7 @@ export const FormStyle = styled.form`
 export const ContactForm = ({ onSubmit }) => {
   return (
     <FormStyle id="formUser" onSubmit={onSubmit}>
-      <Input />
+      <Inputik />
       <AddContactButton />
     </FormStyle>
   );

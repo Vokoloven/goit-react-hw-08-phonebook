@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { userData } from 'redux/selectors';
 import { StyledButton } from './StyledButton';
 import operations from 'redux/auth/auth-operations';
+import Button from '@mui/material/Button';
 
 export const UserMenu = () => {
   const dispatch = useDispatch();
@@ -28,9 +29,12 @@ export const UserMenu = () => {
       >
         Добро пожаловать {name}
       </Box>
-      <StyledButton type="button" onClick={logOutUser}>
+      <Button variant="contained" type="button" onClick={logOutUser}>
         Log Out
-      </StyledButton>
+      </Button>
+      {/* <StyledButton type="button" onClick={logOutUser}>
+        Log Out
+      </StyledButton> */}
     </Box>
   );
 };

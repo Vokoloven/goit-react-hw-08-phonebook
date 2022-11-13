@@ -1,11 +1,17 @@
 import { Box } from 'Theme/Box';
-import { StyledLink } from './StyledLink';
+// import { StyledLink } from './StyledLink';
+import Button from '@mui/material/Button';
+import { NavLink } from 'react-router-dom';
 
 export const AuthNav = () => {
   return (
     <Box ml="auto" mr={3}>
-      <StyledLink to="registration">Registration</StyledLink>
-      <StyledLink to="login">Log In</StyledLink>
+      <Button color="inherit">
+        <NavLink to="registration">Registration</NavLink>
+      </Button>
+      <Button color="inherit">
+        <NavLink to="login">Log In</NavLink>
+      </Button>
     </Box>
   );
 };
