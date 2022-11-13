@@ -1,6 +1,5 @@
 import { Box } from 'Theme/Box';
-// import { StyledInput } from './StyledInput';
-// import { StyledButton } from './StyledButton';
+
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import operations from 'redux/auth/auth-operations';
