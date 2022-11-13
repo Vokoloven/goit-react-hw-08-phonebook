@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunkreact_homework_template=self.webpackChunkreact_homework_template||[]).push([[190],{2190:function(e,t,n){n.r(t),n.d(t,{Filter:function(){return i}});var r=n(5573),o=n(5530),a=n(3329),i=function(e){var t=e.onChange;return(0,a.jsxs)(a.Fragment,{children:[(0,a.jsx)(o.x,{fontSize:3,children:"Find contacts by name"}),(0,a.jsx)(r.Z,{required:!0,id:"outlined-required",type:"text",autoComplete:"off",onChange:t})]})}}}]);
+//# sourceMappingURL=190.c8ef5c2a.chunk.js.map
