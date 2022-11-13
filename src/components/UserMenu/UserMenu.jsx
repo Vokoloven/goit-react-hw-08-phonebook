@@ -1,7 +1,6 @@
 import { Box } from 'Theme/Box';
 import { useSelector, useDispatch } from 'react-redux';
 import { userData } from 'redux/selectors';
-import { StyledButton } from './StyledButton';
 import operations from 'redux/auth/auth-operations';
 import Button from '@mui/material/Button';
 
