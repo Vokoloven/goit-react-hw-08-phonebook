@@ -1,6 +1,8 @@
 import PropTypes from 'prop-types';
 import Button from '@mui/material/Button';
 import { Box } from 'Theme/Box';
+import { ColorButton } from 'components/AuthNav/ColorButton';
+
 // import styled from 'styled-components';
 
 // const ButtonStyle = styled.button`
@@ -14,9 +16,9 @@ import { Box } from 'Theme/Box';
 export const AddContactButton = () => {
   return (
     <Box>
-      <Button variant="contained" color="success" type="submit">
+      <ColorButton variant="contained" color="success" type="submit">
         Add Contact
-      </Button>
+      </ColorButton>
     </Box>
   );
 };

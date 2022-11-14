@@ -23,9 +23,9 @@ export const theme = {
     primary: '#07c',
     secondary: '#30c',
     muted: '#f6f6f6',
-    hover: '#f780eb',
+    hover: '#ff0084',
     active: '#007bff',
-    other: 'green',
+    other: '#669800',
   },
   shadows: {
     main: '2px 2px 2px 3px rgba(0, 0, 0, 0.2)',

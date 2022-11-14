@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import operations from 'redux/auth/auth-operations';
 import TextField from '@mui/material/TextField';
-import Button from '@mui/material/Button';
+import { ColorButton } from 'components/AuthNav/ColorButton';
 
 const LogIn = () => {
   const [email, setEmail] = useState('');
@@ -73,9 +73,9 @@ const LogIn = () => {
           />
         </Box>
         <Box>
-          <Button variant="contained" type="submit">
+          <ColorButton variant="contained" type="submit">
             Log In
-          </Button>
+          </ColorButton>
         </Box>
       </Box>
     </Box>

@@ -15,7 +15,7 @@ export const ButtonAppBar = () => {
   const { isLoggedIn } = useSelector(userData);
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static">
+      <AppBar position="static" sx={{ bgcolor: '#ff9d00' }}>
         <Toolbar>
           <Typography
             variant="h6"
